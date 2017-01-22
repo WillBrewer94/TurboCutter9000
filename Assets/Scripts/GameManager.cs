@@ -50,8 +50,23 @@ public class GameManager : MonoBehaviour {
 
         if(hit.collider != null) {
             Debug.Log("Target " + hit.collider.name + " Hit");
+            SplitBullet(hit.collider.gameObject);
         } else {
             Debug.Log("No Target Hit");
         }
+    }
+
+    public void SplitBullet(GameObject bullet) {
+        Vector2 dir = bullet.GetComponent<Rigidbody2D>().velocity;
+
+        GameObject split1 = Instantiate(bullet);
+        split1.transform.localScale = split1.transform.localScale / 2;
+        split1.GetComponent<Rigidbody2D>().velocity = dir - new Vector2(-40, 0);
+
+        GameObject split2 = Instantiate(bullet);
+        split2.transform.localScale = split2.transform.localScale / 2;
+        split2.GetComponent<Rigidbody2D>().velocity = dir - new Vector2(40, 0);
+
+        Destroy(bullet);
     }
 }

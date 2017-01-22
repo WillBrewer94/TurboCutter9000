@@ -11,6 +11,11 @@ public class Players : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if(Input.GetKeyDown(KeyCode.E)) {
+            Time.timeScale = 0.1f;
+        } else if(Input.GetKeyUp(KeyCode.E)) {
+            Time.timeScale = 1;
+        }
 		
 	}
 }

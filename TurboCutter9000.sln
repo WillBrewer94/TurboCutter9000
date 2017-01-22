@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboCutter9000", "TurboCutter9000.csproj", "{16DCD033-16EB-EF99-6BF2-55550726ED74}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16DCD033-16EB-EF99-6BF2-55550726ED74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16DCD033-16EB-EF99-6BF2-55550726ED74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16DCD033-16EB-EF99-6BF2-55550726ED74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16DCD033-16EB-EF99-6BF2-55550726ED74}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
