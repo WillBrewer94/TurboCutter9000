@@ -16,9 +16,6 @@ public class GameManager : MonoBehaviour {
         //Set Screen Resolution
         //Screen.fullScreen = false;
         Screen.SetResolution(600, 900, false);
-        
-
-
 
         lineOrigin = new Vector2(0, 0);
         lineTarget = new Vector2(0, 0);
