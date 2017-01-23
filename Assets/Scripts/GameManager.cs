@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
     public int width;
     public int height;
+    public GameObject bullet;
+    public Vector2 startVelocity = new Vector2(0, -40);
+
     Vector2 lineOrigin;
     Vector2 lineTarget;
     LineRenderer line;
@@ -21,6 +24,13 @@ public class GameManager : MonoBehaviour {
         lineTarget = new Vector2(0, 0);
         line = GetComponent<LineRenderer>();
         line.sortingLayerName = "Line";
+
+        //Find Bullet
+        bullet = GameObject.Find("Bullet");
+
+        if(bullet.tag == "Level") {
+            StartCoroutine(LevelStart());
+        } 
     }
 
     // Update is called once per frame
@@ -80,6 +90,11 @@ public class GameManager : MonoBehaviour {
         split2.GetComponent<Rigidbody2D>().velocity = dir - new Vector2(40, 0);
 
         Destroy(bullet);
+    }
+
+    IEnumerator LevelStart() {
+        yield return new WaitForSeconds(3);
+        bullet.GetComponent<Rigidbody2D>().velocity = startVelocity;
     }
 
     IEnumerator LoadLevelDelay(int delay, string level) {
