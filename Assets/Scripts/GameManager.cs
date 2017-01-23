@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
+    public int width;
+    public int height;
     Vector2 lineOrigin;
     Vector2 lineTarget;
     LineRenderer line;
@@ -10,6 +13,13 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        //Set Screen Resolution
+        //Screen.fullScreen = false;
+        Screen.SetResolution(600, 900, false);
+        
+
+
+
         lineOrigin = new Vector2(0, 0);
         lineTarget = new Vector2(0, 0);
         line = GetComponent<LineRenderer>();
@@ -49,6 +59,11 @@ public class GameManager : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Linecast(origin, target);
 
         if(hit.collider != null) {
+            if(hit.collider.tag == "Start") {
+                Debug.Log("Start Hit");
+                StartCoroutine(LoadLevelDelay(2, "Level1"));
+            }
+
             Debug.Log("Target " + hit.collider.name + " Hit");
             SplitBullet(hit.collider.gameObject);
         } else {
@@ -68,5 +83,10 @@ public class GameManager : MonoBehaviour {
         split2.GetComponent<Rigidbody2D>().velocity = dir - new Vector2(40, 0);
 
         Destroy(bullet);
+    }
+
+    IEnumerator LoadLevelDelay(int delay, string level) {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(level);
     }
 }
