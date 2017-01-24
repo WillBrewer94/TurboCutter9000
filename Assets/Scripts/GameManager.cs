@@ -69,10 +69,10 @@ public class GameManager : MonoBehaviour {
             if(hit.collider.tag == "Start") {
                 Debug.Log("Start Hit");
                 StartCoroutine(LoadLevelDelay(2, "Level1"));
+            } else if(hit.collider.tag == "Level") {
+                Debug.Log("Target " + hit.collider.name + " Hit");
+                SplitBullet(hit.collider.gameObject);
             }
-
-            Debug.Log("Target " + hit.collider.name + " Hit");
-            SplitBullet(hit.collider.gameObject);
         } else {
             Debug.Log("No Target Hit");
         }
