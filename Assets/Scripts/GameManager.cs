@@ -8,14 +8,19 @@ public class GameManager : MonoBehaviour {
     public int height;
     public GameObject bullet;
     public Vector2 startVelocity = new Vector2(0, -40);
+    public GameObject audio;
 
     Vector2 lineOrigin;
     Vector2 lineTarget;
     LineRenderer line;
     bool draw = false;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake() {
+        DontDestroyOnLoad(GameObject.Find("Audio Source"));
+    }
+
+    // Use this for initialization
+    void Start () {
         //Set Screen Resolution
         //Screen.fullScreen = false;
         Screen.SetResolution(600, 900, false);
@@ -65,14 +70,14 @@ public class GameManager : MonoBehaviour {
         Vector2 direction = origin - target;
         RaycastHit2D hit = Physics2D.Linecast(origin, target);
 
-        if(hit.collider != null) {
+        if(hit.collider != null || hit.collider.tag != "Wall") {
             if(hit.collider.tag == "Start") {
                 Debug.Log("Start Hit");
                 StartCoroutine(LoadLevelDelay(2, "Level1"));
-            } else if(hit.collider.tag == "Level") {
-                Debug.Log("Target " + hit.collider.name + " Hit");
-                SplitBullet(hit.collider.gameObject);
             }
+
+            Debug.Log("Target " + hit.collider.name + " Hit");
+            SplitBullet(hit.collider.gameObject);
         } else {
             Debug.Log("No Target Hit");
         }
@@ -83,10 +88,12 @@ public class GameManager : MonoBehaviour {
 
         GameObject split1 = Instantiate(bullet);
         split1.transform.localScale = split1.transform.localScale / 2;
+        split1.GetComponent<Rigidbody2D>().velocity = bullet.GetComponent<Rigidbody2D>().velocity;
         split1.GetComponent<Rigidbody2D>().velocity = dir - new Vector2(-40, 0);
 
         GameObject split2 = Instantiate(bullet);
         split2.transform.localScale = split2.transform.localScale / 2;
+        split2.GetComponent<Rigidbody2D>().velocity = bullet.GetComponent<Rigidbody2D>().velocity;
         split2.GetComponent<Rigidbody2D>().velocity = dir - new Vector2(40, 0);
 
         Destroy(bullet);
